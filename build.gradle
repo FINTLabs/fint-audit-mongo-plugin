@@ -1,0 +1,49 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.2.RELEASE'
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+plugins {
+	id "com.jfrog.bintray" version "1.7"
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'fint-audit-mongo-plugin'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven {
+        url  "http://dl.bintray.com/fint/maven"
+    }
+    mavenCentral()
+}
+
+
+dependencies {
+    //compile('org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE')
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+
+    compile('no.fint:fint-audit-api:0.0.12')
+
+	runtime('org.springframework.boot:spring-boot-devtools')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('com.github.fakemongo:fongo:2.0.9')
+    testCompile('org.spockframework:spock-spring:1.0-groovy-2.4')
+}
+
+if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
+    apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/bintray.gradle'
+}
