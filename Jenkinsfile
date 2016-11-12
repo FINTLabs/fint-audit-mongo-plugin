@@ -8,7 +8,7 @@ node {
         }
 
         stage('build') {
-            sh './gradlew clean build'
+            sh './gradlew clean jar'
         }
 
         stage('deploy') {
