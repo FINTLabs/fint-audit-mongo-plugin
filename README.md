@@ -17,3 +17,7 @@ repositories {
 
 compile('no.fint:fint-audit-mongo-plugin:0.0.2')
 ```
+
+## Usage
+
+Set `@EnableFintAudit` on your application class.
