@@ -1,10 +1,10 @@
 package no.fint.audit.plugin.mongo;
 
-import no.fint.audit.AuditInterface;
+import no.fint.audit.FintAuditService;
 import no.fint.event.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AuditMongo implements AuditInterface {
+public class AuditMongo implements FintAuditService {
 
     @Autowired
     AuditMongoRepository auditMongoRepository;

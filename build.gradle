@@ -6,9 +6,12 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
+group 'no.fint'
+version '0.0.3-SNAPSHOT'
+
 jar {
 	baseName = 'fint-audit-mongo-plugin'
-	version = '0.0.3-SNAPSHOT'
+	version = version
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -24,7 +27,7 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb:1.4.2.RELEASE')
 
-    compile('no.fint:fint-audit-api:0.0.12')
+    compile('no.fint:fint-audit-api:0.0.13')
 
 	runtime('org.springframework.boot:spring-boot-devtools:1.4.2.RELEASE')
 
