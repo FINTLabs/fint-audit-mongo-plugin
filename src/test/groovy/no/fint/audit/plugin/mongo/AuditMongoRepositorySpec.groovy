@@ -1,5 +1,6 @@
 package no.fint.audit.plugin.mongo
 
+import no.fint.audit.plugin.mongo.testutils.TestApplication
 import no.fint.event.model.Event
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -24,6 +25,5 @@ class AuditMongoRepositorySpec extends Specification {
         then:
         auditMongoRepository.getAllEvents().size() == 1
         auditMongoRepository.getAllEvents().get(0).event.orgId == "rogfk.no"
-
     }
 }

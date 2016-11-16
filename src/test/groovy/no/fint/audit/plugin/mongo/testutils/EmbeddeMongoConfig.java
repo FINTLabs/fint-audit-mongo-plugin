@@ -1,4 +1,4 @@
-package no.fint.audit.plugin.mongo;
+package no.fint.audit.plugin.mongo.testutils;
 
 
 import com.github.fakemongo.Fongo;
