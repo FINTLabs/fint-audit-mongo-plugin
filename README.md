@@ -21,7 +21,7 @@ compile('no.fint:fint-audit-mongo-plugin:0.0.5')
 ## Usage
 
 - Set `@EnableFintAudit` on your application class
-- `@Autowire` in the FintAuditService interface and call `audit(event)` or `auditWithEventData(event)`
+- `@Autowire` in the FintAuditService interface and call `audit(Event event, boolean clearData)`
 
 ## Configuration
 

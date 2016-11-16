@@ -23,7 +23,7 @@ class AuditMongoSpec extends Specification {
         def conditions = new PollingConditions(timeout: 2)
 
         when:
-        fintAuditService.audit(event)
+        fintAuditService.audit(event, true)
 
         then:
         conditions.eventually {
