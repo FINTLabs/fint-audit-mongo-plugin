@@ -7,7 +7,7 @@ apply plugin: 'groovy'
 apply plugin: 'maven'
 
 group 'no.fint'
-version '0.0.4-SNAPSHOT'
+version '0.0.4'
 
 jar {
     baseName = 'fint-audit-mongo-plugin'

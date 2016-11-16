@@ -15,13 +15,13 @@ repositories {
     }
 }
 
-compile('no.fint:fint-audit-mongo-plugin:0.0.3')
+compile('no.fint:fint-audit-mongo-plugin:0.0.4')
 ```
 
 ## Usage
 
 - Set `@EnableFintAudit` on your application class
-- `@Autowire` in the AudioMongo class and call `audit(event)` or `auditWithEventData(event)`
+- `@Autowire` in the FintAuditService class and call `audit(event)` or `auditWithEventData(event)`
 
 ## Configuration
 
