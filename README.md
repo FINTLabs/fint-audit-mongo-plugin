@@ -30,3 +30,6 @@ compile('no.fint:fint-audit-mongo-plugin:0.0.5-SNAPSHOT')
 | fint.audit.mongo.databasename | fint-audit |
 | fint.audit.mongo.hostname | localhost |
 | fint.audit.mongo.port | 27017 |
+| fint.audit.mongo.core-pool-size | 2 |
+| fint.audit.mongo.max-pool-size | 4 |
+| fint.audit.mongo.queue-capacity | 1000000 |

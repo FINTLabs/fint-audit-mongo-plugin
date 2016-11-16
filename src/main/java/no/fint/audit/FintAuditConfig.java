@@ -7,12 +7,12 @@ import no.fint.audit.plugin.mongo.AuditMongoRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 @Configuration
-@EnableAsync
+@Import(AsyncConfig.class)
 @EnableMongoRepositories(basePackageClasses = AuditMongoRepository.class)
 public class FintAuditConfig extends AbstractMongoConfiguration {
 

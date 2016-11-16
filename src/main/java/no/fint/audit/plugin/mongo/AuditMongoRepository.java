@@ -11,7 +11,7 @@ import java.util.List;
 public class AuditMongoRepository {
 
     @Autowired
-    MongoTemplate mongoTemplate;
+    private MongoTemplate mongoTemplate;
 
     public void save(MongoAuditEvent mongoAuditEvent) {
         mongoTemplate.save(mongoAuditEvent);
