@@ -2,7 +2,7 @@
 
 [![Build Status](https://jenkins.rogfk.no/buildStatus/icon?job=FINTprosjektet/fint-audit-mongo-plugin/master)](https://jenkins.rogfk.no/job/FINTprosjektet/job/fint-audit-mongo-plugin/job/master/)
 
-Interface for auditing
+Implementation of fint-audit-api using mongodb.
 
 ## Installation
 
