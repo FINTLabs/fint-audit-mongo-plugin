@@ -7,11 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AuditMongo implements FintAuditService {
 
     @Autowired
-    AuditMongoRepository auditMongoRepository;
+    private AuditMongoRepository auditMongoRepository;
 
     @Override
-    public void audit(Event event, boolean clearData) {
-        MongoAuditEvent mongoAuditEvent = new MongoAuditEvent(event, clearData);
+    public void audit(Event event) {
+        MongoAuditEvent mongoAuditEvent = new MongoAuditEvent(event, true);
+        auditMongoRepository.save(mongoAuditEvent);
+    }
+
+    @Override
+    public void auditWithEventData(Event event) {
+        MongoAuditEvent mongoAuditEvent = new MongoAuditEvent(event, false);
         auditMongoRepository.save(mongoAuditEvent);
     }
 }

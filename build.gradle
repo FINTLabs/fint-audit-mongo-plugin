@@ -1,5 +1,5 @@
 plugins {
-	id "com.jfrog.bintray" version "1.7"
+    id "com.jfrog.bintray" version "1.7"
 }
 
 apply plugin: 'java'
@@ -10,30 +10,29 @@ group 'no.fint'
 version '0.0.4-SNAPSHOT'
 
 jar {
-	baseName = 'fint-audit-mongo-plugin'
-	version = version
+    baseName = 'fint-audit-mongo-plugin'
+    version = version
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
     maven {
-        url  "http://dl.bintray.com/fint/maven"
+        url "http://dl.bintray.com/fint/maven"
     }
     mavenCentral()
 }
 
-
+apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/dependencies.gradle'
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb:1.4.2.RELEASE')
+    compile('no.fint:fint-audit-api:0.0.14')
 
-    compile('no.fint:fint-audit-api:0.0.13')
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+    runtime("org.springframework.boot:spring-boot-devtools:${springBootVersion}")
 
-	runtime('org.springframework.boot:spring-boot-devtools:1.4.2.RELEASE')
-
-	testCompile('org.springframework.boot:spring-boot-starter-test:1.4.2.RELEASE')
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testCompile("org.spockframework:spock-spring:${spockSpringVersion}")
     testCompile('com.github.fakemongo:fongo:2.0.9')
-    testCompile('org.spockframework:spock-spring:1.0-groovy-2.4')
 }
 
 if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {

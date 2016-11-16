@@ -20,4 +20,13 @@ compile('no.fint:fint-audit-mongo-plugin:0.0.3')
 
 ## Usage
 
-Set `@EnableFintAudit` on your application class.
+- Set `@EnableFintAudit` on your application class.  
+- `@Autowire` in the AudioMongo class and call `audit(event)` or `auditWithEventData(event)`.
+
+## Configuration
+
+| Key | Default value |
+|-----|---------------|
+| fint.audit.mongo.databasename | fint-audit |
+| fint.audit.mongo.hostname | localhost |
+| fint.audit.mongo.port | 27017 |

@@ -4,16 +4,14 @@ import no.fint.event.model.Event
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
 @ActiveProfiles("test")
-@ContextConfiguration
 @SpringBootTest(classes = TestApplication)
 class AuditMongoRepositorySpec extends Specification {
 
     @Autowired
-    AuditMongoRepository auditMongoRepository;
+    private AuditMongoRepository auditMongoRepository
 
     def "Save audit event"() {
         given:
@@ -21,7 +19,7 @@ class AuditMongoRepositorySpec extends Specification {
         MongoAuditEvent mongoAuditEvent = new MongoAuditEvent(event, true)
 
         when:
-        auditMongoRepository.save(mongoAuditEvent);
+        auditMongoRepository.save(mongoAuditEvent)
 
         then:
         auditMongoRepository.getAllEvents().size() == 1

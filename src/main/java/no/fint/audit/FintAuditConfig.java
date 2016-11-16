@@ -6,14 +6,12 @@ import no.fint.audit.plugin.mongo.AuditMongo;
 import no.fint.audit.plugin.mongo.AuditMongoRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-@ComponentScan()
-@EnableMongoRepositories(basePackages = "no.fint.audit.plugin.mongo")
+@EnableMongoRepositories(basePackageClasses = AuditMongoRepository.class)
 public class FintAuditConfig extends AbstractMongoConfiguration {
 
     @Value("${fint.audit.mongo.databasename:fint-audit}")
@@ -24,7 +22,6 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
 
     @Value("${fint.audit.mongo.port:27017}")
     private int port;
-
 
     @Override
     protected String getDatabaseName() {
@@ -38,7 +35,7 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
 
     @Override
     protected String getMappingBasePackage() {
-        return "no.fint.audit.plugin.mongo";
+        return AuditMongoRepository.class.getPackage().getName();
     }
 
     @Bean
