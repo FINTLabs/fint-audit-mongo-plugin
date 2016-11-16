@@ -1,4 +1,4 @@
-package no.fint.audit.plugin.mongo;
+package no.fint.audit.plugin.mongo.testutils;
 
 import no.fint.audit.EnableFintAudit;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

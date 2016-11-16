@@ -2,7 +2,7 @@
 
 [![Build Status](https://jenkins.rogfk.no/buildStatus/icon?job=FINTprosjektet/fint-audit-mongo-plugin/master)](https://jenkins.rogfk.no/job/FINTprosjektet/job/fint-audit-mongo-plugin/job/master/)
 
-Interface for auditing
+Implementation of fint-audit-api using mongodb.
 
 ## Installation
 
@@ -20,8 +20,8 @@ compile('no.fint:fint-audit-mongo-plugin:0.0.3')
 
 ## Usage
 
-- Set `@EnableFintAudit` on your application class.  
-- `@Autowire` in the AudioMongo class and call `audit(event)` or `auditWithEventData(event)`.
+- Set `@EnableFintAudit` on your application class
+- `@Autowire` in the AudioMongo class and call `audit(event)` or `auditWithEventData(event)`
 
 ## Configuration
 
