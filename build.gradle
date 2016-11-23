@@ -26,7 +26,7 @@ repositories {
 
 apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/master/dependencies.gradle'
 dependencies {
-    compile('no.fint:fint-audit-api:0.0.15')
+    compile('no.fint:fint-audit-api:0.0.16')
 
     compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
     runtime("org.springframework.boot:spring-boot-devtools:${springBootVersion}")
