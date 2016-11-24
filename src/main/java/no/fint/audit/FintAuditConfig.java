@@ -1,5 +1,6 @@
 package no.fint.audit;
 
+import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import no.fint.audit.plugin.mongo.AuditMongo;
@@ -25,6 +26,9 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
     @Value("${fint.audit.mongo.port:27017}")
     private int port;
 
+    @Value("${fint.audit.test-mode:false}")
+    private String testMode;
+
     @Override
     protected String getDatabaseName() {
         return databaseName;
@@ -32,7 +36,11 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
 
     @Override
     public Mongo mongo() throws Exception {
-        return new MongoClient(hostname, port);
+        if (Boolean.valueOf(testMode)) {
+            return new Fongo(databaseName).getMongo();
+        } else {
+            return new MongoClient(hostname, port);
+        }
     }
 
     @Override

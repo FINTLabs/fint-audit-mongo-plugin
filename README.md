@@ -15,7 +15,7 @@ repositories {
     }
 }
 
-compile('no.fint:fint-audit-mongo-plugin:0.0.9')
+compile('no.fint:fint-audit-mongo-plugin:0.0.10')
 ```
 
 ## Usage
@@ -33,3 +33,4 @@ compile('no.fint:fint-audit-mongo-plugin:0.0.9')
 | fint.audit.mongo.core-pool-size | 2 |
 | fint.audit.mongo.max-pool-size | 4 |
 | fint.audit.mongo.queue-capacity | 1000000 |
+| fint.audit.test-mode | false |

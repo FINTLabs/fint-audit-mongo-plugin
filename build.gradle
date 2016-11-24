@@ -7,7 +7,7 @@ apply plugin: 'groovy'
 apply plugin: 'maven'
 
 group 'no.fint'
-version '0.0.10-SNAPSHOT'
+version '0.0.10'
 
 jar {
     baseName = 'fint-audit-mongo-plugin'
@@ -28,12 +28,12 @@ apply from: 'https://raw.githubusercontent.com/FINTprosjektet/fint-buildscripts/
 dependencies {
     compile('no.fint:fint-audit-api:0.0.18')
 
-    compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
     runtime("org.springframework.boot:spring-boot-devtools:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
+    compile('com.github.fakemongo:fongo:2.0.9')
 
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     testCompile("org.spockframework:spock-spring:${spockSpringVersion}")
-    testCompile('com.github.fakemongo:fongo:2.0.9')
 }
 
 if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
