@@ -3,6 +3,7 @@ package no.fint.audit;
 import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import no.fint.audit.plugin.mongo.AsyncAuditMongo;
 import no.fint.audit.plugin.mongo.AuditMongo;
 import no.fint.audit.plugin.mongo.AuditMongoRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,6 +52,11 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
     @Bean
     public AuditMongo auditMongo() {
         return new AuditMongo();
+    }
+
+    @Bean
+    public AsyncAuditMongo asyncAuditMongo() {
+        return new AsyncAuditMongo();
     }
 
     @Bean
