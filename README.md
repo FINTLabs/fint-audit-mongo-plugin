@@ -1,6 +1,6 @@
 # FINT Mongo Audit Plugin
 
-[![Build Status](https://jenkins.rogfk.no/buildStatus/icon?job=FINTprosjektet/fint-audit-mongo-plugin/master)](https://jenkins.rogfk.no/job/FINTprosjektet/job/fint-audit-mongo-plugin/job/master/)
+[![Build Status](https://travis-ci.org/FINTlibs/fint-audit-mongo-plugin.svg?branch=master)](https://travis-ci.org/FINTlibs/fint-audit-mongo-plugin)
 
 Implementation of fint-audit-api using mongodb.
 
