@@ -34,3 +34,5 @@ compile('no.fint:fint-audit-mongo-plugin:0.0.12')
 | fint.audit.mongo.max-pool-size | 4 |
 | fint.audit.mongo.queue-capacity | 1000000 |
 | fint.audit.test-mode | false |
+
+The `fint.audit.test-mode` will setup an embedded mongodb using [Fongo](https://github.com/fakemongo/fongo).
