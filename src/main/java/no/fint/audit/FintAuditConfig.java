@@ -13,6 +13,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 @Configuration
 @Import(AsyncConfig.class)
 @EnableMongoRepositories(basePackageClasses = AuditMongoRepository.class)
@@ -45,8 +49,10 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
     }
 
     @Override
-    protected String getMappingBasePackage() {
-        return AuditMongoRepository.class.getPackage().getName();
+    protected Collection<String> getMappingBasePackages() {
+        List<String> packages = new ArrayList<>();
+        packages.add(AuditMongoRepository.class.getPackage().getName());
+        return packages;
     }
 
     @Bean

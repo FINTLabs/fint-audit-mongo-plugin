@@ -1,8 +1,8 @@
 language: java
 jdk:
-- oraclejdk8
+ - oraclejdk8
 install: true
-script: ./gradlew build
-notifications:
-  slack:
-    secure: KO5rwdPdqh/C2ggZ0ed8PvlFN3LVMwW5raUo4EpUsvzCCpx6lJ1wEAWJQUSJbGhBnDwWQ37UELqX57KSlpWxTi0/IBTQHR5Gf/nRMJP6HB2yBmWFig0HQeTsThkSQ6EPLrbUm0JN3DJ+BUWmgcNAy5cbdzX4S3g+B3Md5wY02QksgxzX9cLrGGonwNSsR2zT4apX4onvqQX1tA1spoyB6IBefYvzoQakmv6QfahD7cAHJZ5N2cP6B1e/O1uKPXdF8KKms4au4b8mFz1p/kUU9auJcNdO/52JxWWXciplhSr3TC3MGXigKanscMn2tyHYH4lQT+WSV+ilIe7wuvZZ77jwzNniFCgW0zHiq9jfZIvDgHLDglMSB+ncea7bAgE82ZVb/5tabGM3yvIbQS9bB7nccRkBsDWV0LZRze1nKYwb/ckmBpQusQLaI2nphEJ6mQSVH1QTIZhtrMKYxNuZwRaMXX51eCbRXQ4E7jpvroDSa9b3enry36c8C51W6NFv3owj8DRF+2ricZOZIyVomyafA/khYb/HncEK/7UYq2CScJ0uARDKcPwkH5KdiV3Iyfn6pNqZzqjnS6HmX21tnZJl2EcCvzaRTs9yR8+xolQtMX26ueMBnr69Pc45xgJGupRdi2aj8hBMnHPhzmDzOu98WWMTcy3cosKKDZ5NoaQ=
+script:
+ ./gradlew build
+after_success:
+- ./gradlew jacocoTestReport coveralls
