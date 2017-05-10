@@ -5,13 +5,11 @@ import no.fint.audit.plugin.mongo.testutils.TestApplication
 import no.fint.event.model.Event
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 import spock.util.concurrent.PollingConditions
 
-@ContextConfiguration
 @SpringBootTest(classes = TestApplication)
-class AuditMongoSpec extends Specification {
+class AuditMongoIntegrationSpec extends Specification {
 
     @Autowired
     private FintAuditService fintAuditService
@@ -21,11 +19,11 @@ class AuditMongoSpec extends Specification {
 
     def "Persist an AuditEvent"() {
         given:
-        def event = new Event("rogfk.no", "FK", "GET", "C")
-        def conditions = new PollingConditions(timeout: 2)
+        def event = new Event('rogfk.no', 'FK', 'GET', 'C')
+        def conditions = new PollingConditions(timeout: 10)
 
         when:
-        fintAuditService.audit(event, true)
+        fintAuditService.audit(event)
 
         then:
         conditions.eventually {

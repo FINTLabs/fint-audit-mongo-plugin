@@ -31,6 +31,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
     compile('com.github.fakemongo:fongo:2.0.13')
 
+    testCompile('cglib:cglib-nodep:3.2.5')
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     testCompile("org.spockframework:spock-spring:${spockSpringVersion}")
     testCompile("org.spockframework:spock-core:${spockSpringVersion}")
