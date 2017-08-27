@@ -16,13 +16,14 @@ repositories {
     }
 }
 
-compile('no.fint:fint-audit-mongo-plugin:1.0.0')
+compile('no.fint:fint-audit-mongo-plugin:1.1.0')
 ```
 
 ## Usage
 
 - Set `@EnableFintAudit` on your application class
 - `@Autowire` in the FintAuditService interface and call `audit(Event event)`. This will automatically clear the event data
+- Use `audit(Event event, Status... statuses)` will set the status on the event and audit it. Multiple statuses will cause multiple audit log statements
 - If you need control of when to clear the event data, use `audit(Event event, boolean clearData)`
 
 ## Configuration
