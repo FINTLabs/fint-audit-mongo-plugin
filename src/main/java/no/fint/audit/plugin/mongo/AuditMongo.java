@@ -15,9 +15,9 @@ public class AuditMongo implements FintAuditService {
 
     @Override
     public void audit(Event event, Status... statuses) {
-        Event copy = new Event();
-        BeanUtils.copyProperties(event, copy);
         for (Status status : statuses) {
+            Event copy = new Event();
+            BeanUtils.copyProperties(event, copy);
             copy.setStatus(status);
             asyncAuditMongo.audit(copy, true);
         }
