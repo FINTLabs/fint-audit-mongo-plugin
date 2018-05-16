@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
-@Document
+@Document(collection = "auditEvent")
 public class MongoAuditEvent extends AuditEvent {
 
     @Id
