@@ -28,14 +28,14 @@ compile('no.fint:fint-audit-mongo-plugin:1.1.1')
 
 ## Configuration
 
-| Key | Default value | Comment |
-|-----|---------------|---------|
-| fint.audit.mongo.databasename | fint-audit | |
-| fint.audit.mongo.hostname | localhost | deprecated from version 1.2.0 |
-| fint.audit.mongo.port | 27017 | deprecated from version 1.2.0 |
-| fint.audit.mongo.core-pool-size | 2 | |
-| fint.audit.mongo.max-pool-size | 4 | |
-| fint.audit.mongo.queue-capacity | 1000000 | |
-| fint.audit.test-mode | false | |
+| Key | Default value |
+|-----|---------------|
+| fint.audit.mongo.databasename | fint-audit | 
+| fint.audit.mongo.hostname | localhost | 
+| fint.audit.mongo.port | 27017 | 
+| fint.audit.mongo.core-pool-size | 2 | 
+| fint.audit.mongo.max-pool-size | 4 | 
+| fint.audit.mongo.queue-capacity | 1000000 | 
+| fint.audit.test-mode | false | 
 
 The `fint.audit.test-mode` will setup an embedded mongodb using [Fongo](https://github.com/fakemongo/fongo).

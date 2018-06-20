@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,6 +27,13 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
 
     @Value("${fint.audit.mongo.databasename:fint-audit}")
     private String databaseName;
+
+
+    @Value("${fint.audit.mongo.hostname:localhost}")
+    private String hostname;
+
+    @Value("${fint.audit.mongo.port:27017}")
+    private int port;
 
     @Value("${fint.audit.mongo.connection-string}")
     private String connectionString;
@@ -43,10 +51,12 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
         if (Boolean.valueOf(testMode)) {
             return new Fongo(databaseName).getMongo();
         } else {
-            return new MongoClient(
-                    new MongoClientURI(String.format(connectionString, databaseName))
-            );
-
+            if (!StringUtils.isEmpty(connectionString)) {
+                return new MongoClient(
+                        new MongoClientURI(String.format(connectionString, databaseName))
+                );
+            }
+            return new MongoClient(hostname, port);
         }
     }
 
