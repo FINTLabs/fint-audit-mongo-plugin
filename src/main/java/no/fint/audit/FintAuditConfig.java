@@ -3,6 +3,7 @@ package no.fint.audit;
 import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import no.fint.audit.plugin.mongo.AsyncAuditMongo;
 import no.fint.audit.plugin.mongo.AuditMongo;
 import no.fint.audit.plugin.mongo.AuditMongoRepository;
@@ -22,14 +23,12 @@ import java.util.List;
 @EnableMongoRepositories(basePackageClasses = AuditMongoRepository.class)
 public class FintAuditConfig extends AbstractMongoConfiguration {
 
+
     @Value("${fint.audit.mongo.databasename:fint-audit}")
     private String databaseName;
 
-    @Value("${fint.audit.mongo.hostname:localhost}")
-    private String hostname;
-
-    @Value("${fint.audit.mongo.port:27017}")
-    private int port;
+    @Value("${fint.audit.mongo.connection-string}")
+    private String connectionString;
 
     @Value("${fint.audit.test-mode:false}")
     private String testMode;
@@ -44,7 +43,10 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
         if (Boolean.valueOf(testMode)) {
             return new Fongo(databaseName).getMongo();
         } else {
-            return new MongoClient(hostname, port);
+            return new MongoClient(
+                    new MongoClientURI(String.format(connectionString, databaseName))
+            );
+
         }
     }
 

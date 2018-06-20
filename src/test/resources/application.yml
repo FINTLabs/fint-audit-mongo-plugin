@@ -1,3 +1,5 @@
 fint:
  audit:
   test-mode: true
+  mongo:
+    connection-string: "testString"
