@@ -35,7 +35,7 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
     @Value("${fint.audit.mongo.port:27017}")
     private int port;
 
-    @Value("${fint.audit.mongo.connection-string}")
+    @Value("${fint.audit.mongo.connection-string:}")
     private String connectionString;
 
     @Value("${fint.audit.test-mode:false}")
@@ -47,16 +47,16 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
     }
 
     @Override
-    public Mongo mongo() throws Exception {
+    public Mongo mongo() {
         if (Boolean.valueOf(testMode)) {
             return new Fongo(databaseName).getMongo();
         } else {
-            if (!StringUtils.isEmpty(connectionString)) {
-                return new MongoClient(
-                        new MongoClientURI(String.format(connectionString, databaseName))
-                );
+            if (StringUtils.isEmpty(connectionString)) {
+                return new MongoClient(hostname, port);
             }
-            return new MongoClient(hostname, port);
+            return new MongoClient(
+                    new MongoClientURI(String.format(connectionString, databaseName))
+            );
         }
     }
 
