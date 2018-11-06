@@ -15,9 +15,6 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.util.StringUtils;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -50,19 +47,15 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
     }
 
     @Override
-    public Mongo mongo() throws IOException {
+    public Mongo mongo() {
         if (Boolean.valueOf(testMode)) {
             return new Fongo(databaseName).getMongo();
         } else {
             if (StringUtils.isEmpty(connectionString)) {
                 return new MongoClient(hostname, port);
             }
-            String realConnectionString = this.connectionString;
-            if (realConnectionString.startsWith("/") || realConnectionString.startsWith("./")) {
-                realConnectionString = new String(Files.readAllBytes(Paths.get(this.connectionString)));
-            }
             return new MongoClient(
-                    new MongoClientURI(String.format(realConnectionString, databaseName))
+                    new MongoClientURI(String.format(connectionString, databaseName))
             );
         }
     }
