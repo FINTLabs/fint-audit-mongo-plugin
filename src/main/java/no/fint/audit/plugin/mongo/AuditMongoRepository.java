@@ -12,8 +12,11 @@ public class AuditMongoRepository {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Autowired
+    private CollectionNameSupplier collectionNameSupplier;
+
     public void insert(MongoAuditEvent mongoAuditEvent) {
-        mongoTemplate.insert(mongoAuditEvent);
+        mongoTemplate.insert(mongoAuditEvent, collectionNameSupplier.apply(mongoAuditEvent));
     }
 
     @Profile(value = "test")

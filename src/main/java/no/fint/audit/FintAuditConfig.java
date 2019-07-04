@@ -4,9 +4,8 @@ import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import no.fint.audit.plugin.mongo.AuditMongo;
-import no.fint.audit.plugin.mongo.AuditMongoRepository;
-import no.fint.audit.plugin.mongo.AuditMongoWorker;
+import no.fint.audit.plugin.mongo.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +14,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.util.StringUtils;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,6 +28,8 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
     @Value("${fint.audit.mongo.databasename:fint-audit}")
     private String databaseName;
 
+    @Value("${fint.audit.mongo.collection:auditEvent}")
+    private String collectionName;
 
     @Value("${fint.audit.mongo.hostname:localhost}")
     private String hostname;
@@ -82,4 +84,20 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
         return new AuditMongoRepository();
     }
 
+    @Bean
+    public CollectionNameSupplier collectionNameSupplier() {
+        if (collectionName.startsWith("$")) {
+            Method readMethod = BeanUtils
+                    .getPropertyDescriptor(MongoAuditEvent.class, collectionName.substring(1))
+                    .getReadMethod();
+            return mongoAuditEvent -> {
+                try {
+                    return (String) readMethod.invoke(mongoAuditEvent);
+                } catch (Exception e) {
+                    return "auditEvent";
+                }
+            };
+        }
+        return (mongoAuditEvent -> collectionName);
+    }
 }
