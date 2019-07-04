@@ -15,8 +15,11 @@ public class AuditMongoRepository {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Autowired
+    private CollectionNameSupplier collectionNameSupplier;
+
     public void save(MongoAuditEvent mongoAuditEvent) {
-        mongoTemplate.save(mongoAuditEvent);
+        mongoTemplate.save(mongoAuditEvent, collectionNameSupplier.apply(mongoAuditEvent));
     }
 
     @Profile(value = "test")
