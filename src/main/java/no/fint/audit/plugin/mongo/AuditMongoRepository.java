@@ -18,8 +18,8 @@ public class AuditMongoRepository {
 
     public void save(MongoAuditEvent mongoAuditEvent) {
         String collectionName = collectionNameSupplier.apply(mongoAuditEvent);
-        log.debug("Try save to {} - {}", collectionName, mongoAuditEvent);
-        mongoTemplate.save(mongoAuditEvent, collectionName);
+        log.debug("Try insert to {} - {}", collectionName, mongoAuditEvent);
+        mongoTemplate.insert(mongoAuditEvent, collectionName);
     }
 
     @Profile(value = "test")
