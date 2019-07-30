@@ -1,7 +1,7 @@
 # FINT Mongo Audit Plugin
 
 [![Build Status](https://travis-ci.org/FINTlabs/fint-audit-mongo-plugin.svg?branch=master)](https://travis-ci.org/FINTlabs/fint-audit-mongo-plugin)
-[![Coverage Status](https://coveralls.io/repos/github/FINTlabs/fint-audit-mongo-plugin/badge.svg?branch=master)](https://coveralls.io/github/FINTlabs/fint-audit-mongo-plugin?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/FINTLabs/fint-audit-mongo-plugin/badge.svg?branch=master)](https://coveralls.io/github/FINTLabs/fint-audit-mongo-plugin?branch=master)
 
 Implementation of fint-audit-api using mongodb.
 
