@@ -16,9 +16,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 @Slf4j
 @Configuration
@@ -66,9 +65,7 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
 
     @Override
     protected Collection<String> getMappingBasePackages() {
-        List<String> packages = new ArrayList<>();
-        packages.add(AuditMongoRepository.class.getPackage().getName());
-        return packages;
+        return Collections.singleton(AuditMongoRepository.class.getPackage().getName());
     }
 
     @Bean
