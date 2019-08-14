@@ -6,12 +6,12 @@ import spock.lang.Specification
 
 class AuditMongoSpec extends Specification {
     private AuditMongo auditMongo
-    private AsyncAuditMongo asyncAuditMongo
+    private AuditMongoWorker asyncAuditMongo
     private Event event
 
     void setup() {
-        asyncAuditMongo = Mock(AsyncAuditMongo)
-        auditMongo = new AuditMongo(asyncAuditMongo: asyncAuditMongo)
+        asyncAuditMongo = Mock(AuditMongoWorker)
+        auditMongo = new AuditMongo(auditMongoWorker: asyncAuditMongo)
         event = new Event(corrId: '123', status: Status.NEW)
     }
 

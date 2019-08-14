@@ -4,15 +4,15 @@ import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import no.fint.audit.plugin.mongo.AsyncAuditMongo;
 import no.fint.audit.plugin.mongo.AuditMongo;
 import no.fint.audit.plugin.mongo.AuditMongoRepository;
+import no.fint.audit.plugin.mongo.AuditMongoWorker;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Configuration
-@Import(AsyncConfig.class)
+@EnableScheduling
 @EnableMongoRepositories(basePackageClasses = AuditMongoRepository.class)
 public class FintAuditConfig extends AbstractMongoConfiguration {
 
@@ -48,7 +48,7 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
 
     @Override
     public Mongo mongo() {
-        if (Boolean.valueOf(testMode)) {
+        if (Boolean.parseBoolean(testMode)) {
             return new Fongo(databaseName).getMongo();
         } else {
             if (StringUtils.isEmpty(connectionString)) {
@@ -73,12 +73,13 @@ public class FintAuditConfig extends AbstractMongoConfiguration {
     }
 
     @Bean
-    public AsyncAuditMongo asyncAuditMongo() {
-        return new AsyncAuditMongo();
+    public AuditMongoWorker asyncAuditMongo() {
+        return new AuditMongoWorker();
     }
 
     @Bean
     public AuditMongoRepository auditMongoRepository() {
         return new AuditMongoRepository();
     }
+
 }

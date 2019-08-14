@@ -30,15 +30,12 @@ dependencies {
     runtime("org.springframework.boot:spring-boot-devtools:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}")
     compile('com.github.fakemongo:fongo:2.1.0')
+    compile files('libs/circular-buffer-2.0-SNAPSHOT.jar')
 
     testCompile("cglib:cglib-nodep:${cglibVersion}")
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     testCompile("org.spockframework:spock-spring:${spockSpringVersion}")
     testCompile("org.spockframework:spock-core:${spockSpringVersion}")
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = gradleVersion
 }
 
 jacocoTestReport {
