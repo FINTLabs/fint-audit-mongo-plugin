@@ -1,6 +1,6 @@
 package no.fint.audit.plugin.mongo;
 
-import com.mongodb.MongoCommandException;
+import com.mongodb.MongoException;
 import lombok.extern.slf4j.Slf4j;
 import no.fint.event.model.Event;
 import no.twingine.CircularBuffer;
@@ -43,8 +43,8 @@ public class AuditMongoWorker {
                 auditMongoRepository.insert(mongoAuditEvent);
             }
         } catch (UncategorizedMongoDbException e) {
-            if (e.getCause() instanceof MongoCommandException
-                    && ((MongoCommandException)e.getCause()).getErrorCode() == 16500) {
+            if (e.getCause() instanceof MongoException
+                    && ((MongoException)e.getCause()).getCode() == 16500) {
                 log.info("Request rate is large - backing off..");
             }
         } catch (BufferOverflowException e) {

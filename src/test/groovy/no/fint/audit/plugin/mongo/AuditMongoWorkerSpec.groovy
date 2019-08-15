@@ -1,8 +1,12 @@
 package no.fint.audit.plugin.mongo
 
+
+import com.mongodb.MongoException
 import no.fint.event.model.Event
 import org.springframework.data.mongodb.UncategorizedMongoDbException
 import spock.lang.Specification
+
+import java.nio.BufferOverflowException
 
 class AuditMongoWorkerSpec extends Specification {
     private AuditMongoWorker auditMongoWorker
@@ -29,7 +33,20 @@ class AuditMongoWorkerSpec extends Specification {
         auditMongoWorker.save()
 
         then:
-        1 * repository.insert(_ as MongoAuditEvent) >> { throw new UncategorizedMongoDbException('test exception', new Exception()) }
+        1 * repository.insert(_ as MongoAuditEvent) >> {
+            throw new UncategorizedMongoDbException('test exception', new MongoException(16500, 'Request rate is large'))
+        }
+        noExceptionThrown()
+
+
+        when:
+        auditMongoWorker.audit(new Event(), true)
+        auditMongoWorker.save()
+
+        then:
+        1 * repository.insert(_ as MongoAuditEvent) >> {
+            throw new BufferOverflowException()
+        }
         noExceptionThrown()
     }
 
