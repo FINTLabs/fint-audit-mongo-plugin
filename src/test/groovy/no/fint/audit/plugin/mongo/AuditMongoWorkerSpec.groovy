@@ -38,7 +38,6 @@ class AuditMongoWorkerSpec extends Specification {
         }
         noExceptionThrown()
 
-
         when:
         auditMongoWorker.audit(new Event(), true)
         auditMongoWorker.save()
