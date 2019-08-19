@@ -48,8 +48,6 @@ public class AuditMongoWorker {
             }
         } catch (BufferOverflowException e) {
             log.warn("Audit event buffer overflow, losing at least {} events!", bufferSize);
-        } catch (Exception e) {
-            log.info("Insertion failed: {}", e.getMessage());
         }
     }
 
