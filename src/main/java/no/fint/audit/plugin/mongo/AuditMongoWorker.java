@@ -32,23 +32,24 @@ public class AuditMongoWorker {
         index = buffer.index();
     }
 
-    @Scheduled(initialDelay = 5000, fixedRateString = "${fint.audit.mongo.rate:10000}")
+    @Scheduled(initialDelay = 5000, fixedRateString = "${fint.audit.mongo.rate:5000}")
     public void save() {
+        MongoAuditEvent mongoAuditEvent = buffer.take(index);
         try {
-            while (true) {
-                MongoAuditEvent mongoAuditEvent = buffer.take(index);
-                if (mongoAuditEvent == null) {
-                    break;
-                }
+            while (mongoAuditEvent != null) {
                 auditMongoRepository.insert(mongoAuditEvent);
+                mongoAuditEvent = buffer.take(index);
             }
         } catch (UncategorizedMongoDbException e) {
             if (e.getCause() instanceof MongoException
-                    && ((MongoException)e.getCause()).getCode() == 16500) {
+                    && ((MongoException) e.getCause()).getCode() == 16500) {
                 log.info("Request rate is large - backing off..");
+                index.decrementAndGet();
             }
         } catch (BufferOverflowException e) {
             log.warn("Audit event buffer overflow, losing at least {} events!", bufferSize);
+        } catch (Exception e) {
+            log.info("Insertion failed: {}", e.getMessage());
         }
     }
 
