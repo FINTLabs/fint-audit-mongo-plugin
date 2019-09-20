@@ -20,7 +20,7 @@ class AuditMongoRepositoryIntegrationSpec extends Specification {
         MongoAuditEvent mongoAuditEvent = new MongoAuditEvent(event, true)
 
         when:
-        auditMongoRepository.save(mongoAuditEvent)
+        auditMongoRepository.insert(mongoAuditEvent)
 
         then:
         auditMongoRepository.getAllEvents().size() == 1

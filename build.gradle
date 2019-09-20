@@ -37,10 +37,6 @@ dependencies {
     testCompile("org.spockframework:spock-core:${spockSpringVersion}")
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = gradleVersion
-}
-
 jacocoTestReport {
     reports {
         xml.enabled true

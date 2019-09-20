@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AuditMongo implements FintAuditService {
 
     @Autowired
-    private AsyncAuditMongo asyncAuditMongo;
+    private AuditMongoWorker auditMongoWorker;
 
     @Override
     public void audit(Event event, Status... statuses) {
@@ -19,7 +19,7 @@ public class AuditMongo implements FintAuditService {
             Event copy = new Event();
             BeanUtils.copyProperties(event, copy);
             copy.setStatus(status);
-            asyncAuditMongo.audit(copy, true);
+            auditMongoWorker.audit(copy, true);
         }
         event.setStatus(statuses[statuses.length - 1]);
     }
@@ -28,6 +28,6 @@ public class AuditMongo implements FintAuditService {
     public void audit(Event event, boolean clearData) {
         Event copy = new Event();
         BeanUtils.copyProperties(event, copy);
-        asyncAuditMongo.audit(copy, clearData);
+        auditMongoWorker.audit(copy, clearData);
     }
 }
