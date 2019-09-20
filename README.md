@@ -31,9 +31,10 @@ compile('no.fint:fint-audit-mongo-plugin:1.4.0')
 | Key | Default value | Comment |
 |-----|---------------|---------|
 | fint.audit.mongo.connection-string | localhost | Example: `mongodb://app_user:bestPo55word3v3r@localhost/%s`|
-| fint.audit.mongo.databasename | fint-audit | |
 | fint.audit.mongo.hostname | localhost | if connection-string is set this will be ignored |
 | fint.audit.mongo.port | 27017 | if connection-string is set this will be ignored |
+| fint.audit.mongo.databasename | fint-audit | Name of database. |
+| fint.audit.mongo.collection | auditEvent | Name of collection.  Can either be a fixed string or a field from the event in the form `$fieldName`. |
 | fint.audit.mongo.buffer-size | 100000 | Number of audit events that can be pending delivery. |
 | fint.audit.mongo.rate | 5000 | Scheduling rate for worker thread writing events to MongoDB. |
 | fint.audit.test-mode | false | |
