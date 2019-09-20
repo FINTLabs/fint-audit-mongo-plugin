@@ -16,7 +16,7 @@ public class AuditMongoRepository {
     @Autowired
     private CollectionNameSupplier collectionNameSupplier;
 
-    public void save(MongoAuditEvent mongoAuditEvent) {
+    public void insert(MongoAuditEvent mongoAuditEvent) {
         String collectionName = collectionNameSupplier.apply(mongoAuditEvent);
         log.debug("Try insert to {} - {}", collectionName, mongoAuditEvent);
         mongoTemplate.insert(mongoAuditEvent, collectionName);
