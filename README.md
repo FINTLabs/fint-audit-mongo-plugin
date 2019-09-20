@@ -34,9 +34,8 @@ compile('no.fint:fint-audit-mongo-plugin:1.4.0')
 | fint.audit.mongo.databasename | fint-audit | |
 | fint.audit.mongo.hostname | localhost | if connection-string is set this will be ignored |
 | fint.audit.mongo.port | 27017 | if connection-string is set this will be ignored |
-| fint.audit.mongo.core-pool-size | 2 | |
-| fint.audit.mongo.max-pool-size | 4 | |
-| fint.audit.mongo.queue-capacity | 1000000 | |
+| fint.audit.mongo.buffer-size | 100000 | Number of audit events that can be pending delivery. |
+| fint.audit.mongo.rate | 5000 | Scheduling rate for worker thread writing events to MongoDB. |
 | fint.audit.test-mode | false | |
 
 The `fint.audit.test-mode` will setup an embedded mongodb using [Fongo](https://github.com/fakemongo/fongo).
