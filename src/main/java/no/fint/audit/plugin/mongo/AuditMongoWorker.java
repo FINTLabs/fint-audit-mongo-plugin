@@ -19,7 +19,7 @@ public class AuditMongoWorker {
     @Autowired
     private AuditMongoRepository auditMongoRepository;
 
-    @Value("${fint.audit.mongo.buffer-size:100000}")
+    @Value("${fint.audit.mongo.buffer-size:200000}")
     private int bufferSize;
 
     private CircularBuffer<MongoAuditEvent> buffer;
@@ -32,7 +32,7 @@ public class AuditMongoWorker {
         index = buffer.index();
     }
 
-    @Scheduled(initialDelay = 5000, fixedRateString = "${fint.audit.mongo.rate:5000}")
+    @Scheduled(initialDelay = 5000, fixedRateString = "${fint.audit.mongo.rate:1000}")
     public void save() {
         MongoAuditEvent mongoAuditEvent = buffer.take(index);
         try {
