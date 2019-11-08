@@ -13,8 +13,11 @@ public class MongoAuditEvent extends AuditEvent {
     @Id
     private String id;
 
+    private String partition;
+
     public MongoAuditEvent(Event event, boolean clearData) {
         super(event, clearData);
         id = UUID.randomUUID().toString();
+        partition = event.getOrgId() + "/" + event.getSource();
     }
 }
