@@ -16,7 +16,7 @@ repositories {
     }
 }
 
-compile('no.fint:fint-audit-mongo-plugin:1.4.0')
+compile('no.fint:fint-audit-mongo-plugin:1.6.1')
 ```
 
 ## Usage
