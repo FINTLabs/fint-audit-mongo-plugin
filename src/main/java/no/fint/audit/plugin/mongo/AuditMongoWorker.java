@@ -32,7 +32,7 @@ public class AuditMongoWorker {
         index = buffer.index();
     }
 
-    @Scheduled(initialDelay = 5000, fixedRateString = "${fint.audit.mongo.rate:1000}")
+    @Scheduled(initialDelay = 5000, fixedDelayString = "${fint.audit.mongo.rate:1000}")
     public void save() {
         MongoAuditEvent mongoAuditEvent = buffer.take(index);
         try {
@@ -48,6 +48,8 @@ public class AuditMongoWorker {
             }
         } catch (BufferOverflowException e) {
             log.warn("Audit event buffer overflow, losing at least {} events!", bufferSize);
+        } catch (Exception e) {
+            log.trace("Discarding audit event due to unknown error", e);
         }
     }
 
