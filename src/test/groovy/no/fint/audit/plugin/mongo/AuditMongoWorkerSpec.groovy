@@ -14,7 +14,7 @@ class AuditMongoWorkerSpec extends Specification {
 
     void setup() {
         repository = Mock(AuditMongoRepository)
-        auditMongoWorker = new AuditMongoWorker(auditMongoRepository: repository, bufferSize: 10)
+        auditMongoWorker = new AuditMongoWorker(auditMongoRepository: repository, bufferSize: 10, rate: 100, workers: 1)
         auditMongoWorker.init()
     }
 
