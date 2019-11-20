@@ -21,7 +21,6 @@ import java.util.Collections;
 
 @Slf4j
 @Configuration
-@EnableScheduling
 @EnableMongoRepositories(basePackageClasses = AuditMongoRepository.class)
 public class FintAuditConfig extends AbstractMongoConfiguration {
 

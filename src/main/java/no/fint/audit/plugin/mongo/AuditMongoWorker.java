@@ -7,10 +7,12 @@ import no.twingine.CircularBuffer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.UncategorizedMongoDbException;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.annotation.PostConstruct;
 import java.nio.BufferOverflowException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
@@ -22,17 +24,26 @@ public class AuditMongoWorker {
     @Value("${fint.audit.mongo.buffer-size:200000}")
     private int bufferSize;
 
+    @Value("${fint.audit.mongo.workers:1}")
+    private int workers;
+
+    @Value("${fint.audit.mongo.rate:2500}")
+    private long rate;
+
     private CircularBuffer<MongoAuditEvent> buffer;
 
     private AtomicLong index;
+
+    private ScheduledExecutorService executorService;
 
     @PostConstruct
     public void init() {
         buffer = new CircularBuffer<>(bufferSize);
         index = buffer.index();
+        executorService = Executors.newScheduledThreadPool(workers);
+        executorService.scheduleWithFixedDelay(this::save, rate, rate, TimeUnit.MILLISECONDS);
     }
 
-    @Scheduled(initialDelay = 5000, fixedDelayString = "${fint.audit.mongo.rate:1000}")
     public void save() {
         MongoAuditEvent mongoAuditEvent = buffer.take(index);
         try {
@@ -49,7 +60,7 @@ public class AuditMongoWorker {
         } catch (BufferOverflowException e) {
             log.warn("Audit event buffer overflow, losing at least {} events!", bufferSize);
         } catch (Exception e) {
-            log.trace("Discarding audit event due to unknown error", e);
+            log.trace("Stopping due to unknown error", e);
         }
     }
 
