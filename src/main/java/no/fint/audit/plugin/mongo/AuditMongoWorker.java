@@ -24,9 +24,6 @@ public class AuditMongoWorker {
     @Value("${fint.audit.mongo.buffer-size:200000}")
     private int bufferSize;
 
-    @Value("${fint.audit.mongo.workers:1}")
-    private int workers;
-
     @Value("${fint.audit.mongo.rate:2500}")
     private long rate;
 
@@ -40,7 +37,7 @@ public class AuditMongoWorker {
     public void init() {
         buffer = new CircularBuffer<>(bufferSize);
         index = buffer.index();
-        executorService = Executors.newScheduledThreadPool(workers);
+        executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.scheduleWithFixedDelay(this::save, rate, rate, TimeUnit.MILLISECONDS);
     }
 
